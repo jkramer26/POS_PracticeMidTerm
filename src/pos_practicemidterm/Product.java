@@ -10,14 +10,15 @@ package pos_practicemidterm;
  * @author kramerj
  */
 public class Product {
-    private double productId;
+    private String productId;
     private String productDescription;
     private double unitPrice;
     private DiscountStrategy discountStrategy;
     
     //constructor
     //need to validate this
-    public Product(double productId, String productDescription, double unitPrice) {
+    //add discount strat
+    public Product(String productId, String productDescription, double unitPrice) {
         this.productId = productId;
         this.productDescription = productDescription;
         this.unitPrice = unitPrice;
@@ -25,11 +26,11 @@ public class Product {
     
     
     //getters and setters
-    public double getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(double productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 

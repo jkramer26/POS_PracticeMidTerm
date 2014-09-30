@@ -1,4 +1,3 @@
-
 package pos_practicemidterm;
 
 /**
@@ -6,25 +5,31 @@ package pos_practicemidterm;
  * @author kramerj
  */
 public class Register {
-    private Store store;
-    private FakeDatabase db;
-    private double transactionNumber;
+
+    
+    LineItem [] lineItems = new LineItem[0];
     private String productId;
     private int quantity;
     
     //get item number and quantity
-    public void startNewTransaction(double transactionNumber, String productId, int quantity) {
-        this.transactionNumber = transactionNumber;
+    public void startNewTransaction(String productId, int quantity) {
         this.productId = productId;
         this.quantity = quantity;
     }
-    
-    //addItem method
-    public void addProduct() {
+
+    //addItem method. Added to lineItem
+    public void addItem(String productId, int quantity) {
         
     }
-    
-    //calculate 
-    
+
+    private void addToArray(final LineItem item) {
+        // needs validation
+        LineItem[] tempItems = new LineItem[lineItems.length + 1];
+        System.arraycopy(lineItems, 0, tempItems, 0, lineItems.length);
+        tempItems[lineItems.length] = item;
+        lineItems = tempItems;
+    }
+
+    //calculate
     
 }
