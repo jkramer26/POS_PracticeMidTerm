@@ -7,15 +7,24 @@ package pos_practicemidterm;
  */
 public class Register {
     private Store store;
-    private Receipt receipt;
     private FakeDatabase db;
     private double transactionNumber;
+    private String productId;
+    private int quantity;
     
-    public void startNewTransaction(double transactionNumber) {
+    //get item number and quantity
+    public void startNewTransaction(double transactionNumber, String productId, int quantity) {
         this.transactionNumber = transactionNumber;
-        
+        this.productId = productId;
+        this.quantity = quantity;
     }
     
     //addItem method
+    public void addProduct() {
+        
+    }
+    
+    //calculate 
+    
     
 }

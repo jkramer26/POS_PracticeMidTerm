@@ -6,6 +6,7 @@
 package pos_practicemidterm;
 
 
-public class DiscountStrategy {
+public interface DiscountStrategy {
+    public abstract double getDiscount();
     
 }
