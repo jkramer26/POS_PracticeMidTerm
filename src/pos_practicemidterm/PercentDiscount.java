@@ -1,6 +1,6 @@
 
 package pos_practicemidterm;
 
-public class PercentDiscount {
+public class PercentDiscount implements DiscountStrategy {
     
 }

@@ -5,31 +5,37 @@ package pos_practicemidterm;
  * @author kramerj
  */
 public class Register {
-
-    
-    LineItem [] lineItems = new LineItem[0];
+    Receipt receipt;
+    private int customerId; 
     private String productId;
     private int quantity;
     
+    
+    
     //get item number and quantity
-    public void startNewTransaction(String productId, int quantity) {
+    /**
+     * Method that starts a new transaction and creates a new receipt object
+     * @param customerId Passes in the id of a customer
+     * @param productId Passes in a product the customer has
+     * @param quantity  Passes in the quantity of the product
+     */
+    public void startNewTransaction(int customerId, String productId, int quantity) {
         this.productId = productId;
         this.quantity = quantity;
+        
+        receipt = new Receipt();
     }
 
     //addItem method. Added to lineItem
+    /**
+     * Method that adds another item to the transaction. 
+     * This method delegates to the receipt class to add another line item
+     * @param productId  Passes in the product id of the item
+     * @param quantity   Passes in the quantity of the item
+     */
     public void addItem(String productId, int quantity) {
-        
+        receipt.addLineItem(productId, quantity);
     }
-
-    private void addToArray(final LineItem item) {
-        // needs validation
-        LineItem[] tempItems = new LineItem[lineItems.length + 1];
-        System.arraycopy(lineItems, 0, tempItems, 0, lineItems.length);
-        tempItems[lineItems.length] = item;
-        lineItems = tempItems;
-    }
-
-    //calculate
+    
     
 }
