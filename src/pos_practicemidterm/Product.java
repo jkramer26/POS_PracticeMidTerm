@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package pos_practicemidterm;
 
 /**
- *
- * @author kramerj
+ * This class represents a product in a store. 
+ * It is responsible for creating an id, description, & price for a product. 
+ * This class implements a discountStrategy that can adjust the price for a product. 
+ * @author Jessica Kramer
  */
+
 public class Product {
     private String productId;
     private String productDescription;
@@ -19,14 +18,33 @@ public class Product {
     //need to validate this
     //add discount strat
     //pass in DiscountStrat
-    public Product(String productId, String productDescription, double unitPrice) {
+    /**
+     * Constructor that passes in below parameters
+     * @param productId             //Unique id for a product
+     * @param productDescription    //The description for a product 
+     * @param unitPrice             //The unit price for a product
+     * @param discountStrategy      //Passing in a discountStrategy object
+     */
+    public Product(String productId, String productDescription, double unitPrice, DiscountStrategy discountStrategy) {
         this.productId = productId;
         this.productDescription = productDescription;
         this.unitPrice = unitPrice;
+        this.discountStrategy = discountStrategy;
     }
     
+    /**
+     * This method gets the discount amount for a product
+     * @return This will return the discount amount
+     */
+    public double getProductDiscount() {
+        return discountStrategy.getProductDiscount(unitPrice);
+    }
     
-    //getters and setters
+    //getters and setters below
+    /**
+     * Returns the id for a product
+     * @return 
+     */
     public String getProductId() {
         return productId;
     }
@@ -44,22 +62,40 @@ public class Product {
         }
         this.productId = productId;
     }
-
+    
+    /**
+     * This method returns the description for a product
+     * @return 
+     */
     public String getProductDescription() {
         return productDescription;
     }
     
-    //need to validate
+    /**
+     * This method stores a product description. 
+     * @param productDescription The description is validated to make make sure
+     * it is not null or empty
+     */
     public void setProductDescription(String productDescription) {
+        if(productId == null || productId.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         this.productDescription = productDescription;
     }
 
+    /**
+     * This method will return the unit price for a product
+     * @return 
+     */
     public double getUnitPrice() {
         
         return unitPrice;
     }
     
-    //need javadoc
+    /**
+     * This method will store the unit price for a product
+     * @param unitPrice is validated so that the price is not set less than 0 dollars
+     */
     public void setUnitPrice(double unitPrice) {
         if(unitPrice < 0) {
             throw new IllegalArgumentException();
@@ -67,16 +103,23 @@ public class Product {
         this.unitPrice = unitPrice;
     }
     
-    
+    /**
+     * This will return a discount strategy object
+     * @return 
+     */
     public DiscountStrategy getDiscountStrategy() {
         return discountStrategy;
     }
     
-    //need to validate
-    //need javadoc
+    //need to validate?
+    /**
+     * This will set a discount strategy object
+     * @param discountStrategy 
+     */
     public void setDiscountStrategy(DiscountStrategy discountStrategy) {
         this.discountStrategy = discountStrategy;
     }
+    
     
     
     

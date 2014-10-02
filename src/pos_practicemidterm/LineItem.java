@@ -1,6 +1,13 @@
 
 package pos_practicemidterm;
 
+/**
+ * This class represents a simulation of a real receipt in a retail sales situation. 
+ * It is responsible for managing miscellaneous receipt, customer and line item information. 
+ * It also serves as a high-level service class, delegating to varying data access strategies 
+ * and output strategies. 
+ * @Jessica Kramer
+ */
 
 public class LineItem {
     private Product product;  //Product instance variable
@@ -33,8 +40,9 @@ public class LineItem {
     //Discount total
     //LineTotal
     
+    
     public double getCalculatedLineTotal() {
-        lineTotal = (quantity * product.getUnitPrice());
+        lineTotal = ((quantity * product.getUnitPrice()) /* - product.DiscountStart */);
         
         return lineTotal;
     }
@@ -50,18 +58,22 @@ public class LineItem {
     public String getDescription() {
         return product.getProductDescription();
     }
+    public double getDiscount() {
+        return product.getDiscountAmount();
+    }
     
     //for testing purposes
     public static void main(String[] args) {
         //System.out.println("Product: " + product.setProductId("452"));
         FakeDatabase d = new FakeDatabase();
         
-        LineItem line = new LineItem("F48", d, 2);
+        LineItem line = new LineItem("A202", d, 2);
         
         System.out.println("LineTotal: " + line.getCalculatedLineTotal());
         System.out.println("ID: " + line.getProductID());
         System.out.println("Unit Price: " + line.getUnitPrice());
         System.out.println("Description: " + line.getDescription());
+        System.out.println("Discount: " + line.product.getProductDiscount());
     }
     
     

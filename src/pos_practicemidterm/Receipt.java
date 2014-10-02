@@ -47,5 +47,12 @@ public class Receipt {
         lineItems = tempItems;
     }
     
+    private String receipt; //variable to output lineItems & their 
+    //print receipt method that will loop through item array and output info 
+    private String printReceipt() {
+        
+        return receipt;
+    }
+    
     //just going to output things from register class and total up 
 }

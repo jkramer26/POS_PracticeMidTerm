@@ -1,35 +1,38 @@
 package pos_practicemidterm;
 
+/**
+ * This class represents a simulation of a real receipt in a retail sales situation. 
+ * It is responsible for managing miscellaneous receipt, customer and line item information. 
+ * It also serves as a high-level service class, delegating to varying data access strategies 
+ * and output strategies. 
+ * @Jessica Kramer
+ */
+
 public class FakeDatabase {
 
     DiscountStrategy discountStrategy;
-
+    
     // 
     Product[] productList = {
-        new Product("A202", "Pink Shirt", 13.23), //add discount strat
-        new Product("F485", "Baseball Bat", 15.25) //add discount strat
+        //why does paren have to be after database/
+        new Product("A202", "Pink Shirt", 13.23, new PercentDiscount()), //add discount strat
+        new Product("F485", "Baseball Bat", 15.25, new PercentDiscount()) //add discount strat
     };
     //find Product. Looping over.... 
     Product product;
 
-    //Product test = new Product("A202", "Pink Shirt", 13.23);
-//    public Product findProduct(String productId) {
-//        if (productId.equals(productList[1].getProductId())) {
-//            product = productList[1]; 
-//        }
-//        return product;
-//    }
+    //look up enhanced for loop
     public Product findProduct(String productId) {
         for (int i = 0; i < productList.length; i++) {
-            //add validationi for if the product id is null
+            //add validationi for if the product id is null or if it is not a valid id
+            //validation should be outside of the loop
             if (productId.equals(productList[i].getProductId())) {
             product = productList[i];
-            } else {
-                System.out.println("This is not a valid Product ID.");
-            }         
+            }      
         }
         return product;
     }
+    
     //add customer array as well
 
 }
