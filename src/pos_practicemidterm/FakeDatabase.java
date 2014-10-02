@@ -8,6 +8,9 @@ package pos_practicemidterm;
  * @Jessica Kramer
  */
 
+//need to create another database for customers. 
+//the two should not be within the same database
+
 public class FakeDatabase implements DatabaseStrategy {
 
     DiscountStrategy discountStrategy;  //Instance variable of discount strategy
@@ -65,13 +68,13 @@ public class FakeDatabase implements DatabaseStrategy {
     
     @Override
     public Customer findCustomer(String customerId) {
-        Customer customer = null;
-        for (int i = 0; i < customerList.length; i++) {
+        //Customer customer = null;
+        for (Customer customerList1 : customerList) {
             //add validationi for if the product id is null or if it is not a valid id
             //validation should be outside of the loop
-            if (customerId.equals(customerList[i].getCustomerId())) {
-            customer = customerList[i];
-            break;
+            if (customerId.equals(customerList1.getCustomerId())) {
+                customer = customerList1;
+                break;
             }      
         }
         

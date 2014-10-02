@@ -4,16 +4,13 @@ package pos_practicemidterm;
  * This class represents a simulation of a register in a retail sales situation. 
  * It is responsible for creating a receipt and for passing in new products & 
  * their quantities. 
- * @author kramerj
+ * 
+ * @author Jessica Kramer
  */
 public class Register {
-    Receipt receipt;
-    public static int receiptNumber = 0;
+    ReceiptStrategy receipt;                //creating an instance variable of Receipt Strategy
+    public static int receiptNumber = 0;    //global variable that stores the number of a receipt
     
-    
-    public Register() {
-        
-    }
     
     /**
      * Method that starts a new transaction. Creates a new receipt object and 

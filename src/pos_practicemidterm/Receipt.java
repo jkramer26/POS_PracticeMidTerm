@@ -8,20 +8,30 @@ package pos_practicemidterm;
  * and output strategies. 
  * @Jessica Kramer
  */
-public class Receipt {
+public class Receipt implements ReceiptStrategy {
     private DatabaseStrategy db;        //DatabaseStrategy instance variable
     private Customer customer;          //Customer instance variable
     //private Store store;
-    private LineItem [] lineItems;              //variable that passes a line item into an array
+    private LineItem [] lineItems;      //variable name for an array 
     private String receipt;             //variable to output receipt 
     private double grandTotal;          //variable that holds the grandtotal of all line items
     private double discountGrandTotal;  //variable that holds the total discount for all line items
     
-    //private final Customer ... find customer
+    /**
+     * This is a constructor that passes in a customer id and a database 
+     * object. The method finds a customer's id in a database and also initializes
+     * an array. The parameters will only be passed in if they are not null
+     * or empty. 
+     * @param customerId Passes in a customer's id
+     * @param db Passes in a database strategy object
+     */
     public Receipt(String customerId, DatabaseStrategy db) {
+         if(customerId == null || customerId.isEmpty() || db == null) {
+             throw new IllegalArgumentException();
+         }
          customer = db.findCustomer(customerId);
          this.db = db;
-         lineItems = new LineItem[0];
+         lineItems = new LineItem[0];   //this is an array to store line items in
     }
 
     /**
@@ -29,6 +39,7 @@ public class Receipt {
      * @param productId Unique identifier for a product
      * @param qty    The quantity of the product purchased
      */
+    @Override
     public void addLineItem(String productId, int qty) {
         if(productId == null || productId.isEmpty() ||
                 qty < 0) {
@@ -38,10 +49,9 @@ public class Receipt {
         addToArray(item);
     }
     
-    //array to store lineItems
    
     /**
-     * A method to resize an existing array.
+     * A private method to resize an existing array.
      * Makes a temporary array one size larger than lineItems array
      * and then copies lineItems into the tempItems. 
      * New item is added to tempArray and then lineItem array copies the tempArray
@@ -56,7 +66,7 @@ public class Receipt {
     }
     
     /**
-     * This method will calculate the total discount for all the line items
+     * A private method that will calculate the total discount for all the line items
      * @return Will return the total discount
      */
     private double calculateDiscountGrandTotal(){
@@ -81,7 +91,8 @@ public class Receipt {
      * Method that will print out a receipt with all line items and a grand total
      * while formatting all the information. 
      */
-    //make the println's below be final variables
+    //make the println's below be final variables and store them at the top above
+    @Override
     public void outputReceipt() {
         System.out.println("____________________________________________________________________________________________________");
         System.out.println("____________________________________________________________________________________________________");
