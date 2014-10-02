@@ -15,8 +15,9 @@ public class FakeDatabase {
     // 
     Product[] productList = {
         //why does paren have to be after database/
-        new Product("A202", "Pink Shirt", 13.23, new PercentDiscount()), //add discount strat
-        new Product("F485", "Baseball Bat", 15.25, new PercentDiscount()) //add discount strat
+        new Product("A202", "Pink Shirt", 5.00, new PercentDiscount()), 
+        new Product("F485", "Baseball Bat", 15.00, new FlatDiscount()),
+        new Product("E404", "Orange Towel", 10.00, new NoDiscount())
     };
     //find Product. Looping over.... 
     Product product;

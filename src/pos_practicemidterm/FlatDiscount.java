@@ -9,24 +9,23 @@ package pos_practicemidterm;
  */
 
 public class FlatDiscount implements DiscountStrategy {
-    private double flatDiscountRate = 3;
-    private double discountAmount;
-    private double discount;
+    private double flatDiscountRate = 3;        //the flat rate discount amount
+    private double productPriceAfterDiscount;   //the price of product after discount if taken off
 
     
     /**
-     * This method calculates a flat discount rate by taking the unit price of a
-     * product and subtracting it by the rate
+     * This method will return a flat rate discount amount
      * @param unitPrice The unit price for a product
-     * @return Will only return a discount amount if it is greater than 0 dollars
+     * @return Will only return the discount amount if the price of the product
+     * after the flat rate is taken off is greater than 0
      */
     @Override
     public double getProductDiscount(double unitPrice) {
-        discountAmount = (unitPrice - flatDiscountRate);
-        if(discountAmount < 0) {
+        productPriceAfterDiscount = (unitPrice - flatDiscountRate);
+        if(productPriceAfterDiscount < 0) {
             throw new IllegalArgumentException();
         }
-        return discount;
+        return flatDiscountRate;
     }
     
     
