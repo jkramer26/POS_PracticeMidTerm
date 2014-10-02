@@ -19,7 +19,7 @@ public class Register {
      * @param db Passes in a database object
      */
     public void startNewTransaction(String customerId, DatabaseStrategy db) {
-        receipt = new Receipt(customerId, db);
+        receipt = new ConsoleReceipt(customerId, db);
         receiptNumber++;
     }
 

@@ -8,7 +8,7 @@ package pos_practicemidterm;
  * and output strategies. 
  * @Jessica Kramer
  */
-public class Receipt implements ReceiptStrategy {
+public class ConsoleReceipt implements ReceiptStrategy {
     private DatabaseStrategy db;        //DatabaseStrategy instance variable
     private Customer customer;          //Customer instance variable
     //private Store store;
@@ -25,7 +25,7 @@ public class Receipt implements ReceiptStrategy {
      * @param customerId Passes in a customer's id
      * @param db Passes in a database strategy object
      */
-    public Receipt(String customerId, DatabaseStrategy db) {
+    public ConsoleReceipt(String customerId, DatabaseStrategy db) {
          if(customerId == null || customerId.isEmpty() || db == null) {
              throw new IllegalArgumentException();
          }
