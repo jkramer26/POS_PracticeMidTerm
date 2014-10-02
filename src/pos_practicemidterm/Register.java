@@ -6,24 +6,17 @@ package pos_practicemidterm;
  */
 public class Register {
     Receipt receipt;
-    private int customerId; 
-    private String productId;
-    private int quantity;
-    
-    
+    public static int receiptNum;
     
     //get item number and quantity
     /**
      * Method that starts a new transaction and creates a new receipt object
      * @param customerId Passes in the id of a customer
-     * @param productId Passes in a product the customer has
-     * @param quantity  Passes in the quantity of the product
      */
-    public void startNewTransaction(int customerId, String productId, int quantity) {
-        this.productId = productId;
-        this.quantity = quantity;
+    public void startNewTransaction(String customerId, DatabaseStrategy db) {
+        receipt = new Receipt(customerId, db);
         
-        receipt = new Receipt();
+        receiptNum++;
     }
 
     //addItem method. Added to lineItem

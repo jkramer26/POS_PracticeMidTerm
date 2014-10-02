@@ -14,22 +14,18 @@ public class Product {
     private double unitPrice;
     private DiscountStrategy discountStrategy;
     
-    //constructor
-    //need to validate this
-    //add discount strat
-    //pass in DiscountStrat
     /**
-     * Constructor that passes in below parameters
+     * Constructor that passes in below parameters and validates the input
      * @param productId             //Unique id for a product
      * @param productDescription    //The description for a product 
      * @param unitPrice             //The unit price for a product
      * @param discountStrategy      //Passing in a discountStrategy object
      */
     public Product(String productId, String productDescription, double unitPrice, DiscountStrategy discountStrategy) {
-        this.productId = productId;
-        this.productDescription = productDescription;
-        this.unitPrice = unitPrice;
-        this.discountStrategy = discountStrategy;
+        setProductId(productId);
+        setProductDescription(productDescription);
+        setUnitPrice(unitPrice);
+        setDiscountStrategy(discountStrategy);
     }
     
     /**
