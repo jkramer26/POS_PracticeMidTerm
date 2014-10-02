@@ -20,8 +20,8 @@ public class FlatDiscount implements DiscountStrategy {
      * after the flat rate is taken off is greater than 0
      */
     @Override
-    public double getProductDiscount(double unitPrice) {
-        productPriceAfterDiscount = (unitPrice - flatDiscountRate);
+    public double getProductDiscount(double unitPrice, int qty) {
+        productPriceAfterDiscount = (unitPrice * qty - flatDiscountRate);
         if(productPriceAfterDiscount < 0) {
             throw new IllegalArgumentException();
         }

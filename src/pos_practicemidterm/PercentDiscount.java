@@ -21,8 +21,8 @@ public class PercentDiscount implements DiscountStrategy {
      * @return Discount will be returned as long as it is greater than 0
      */
     @Override
-    public double getProductDiscount(double unitPrice) {
-        discountAmount = (unitPrice * .10);
+    public double getProductDiscount(double unitPrice, int qty) {
+        discountAmount = (unitPrice * qty * .10);
         if(discountAmount < 0) {
             throw new IllegalArgumentException();
         }

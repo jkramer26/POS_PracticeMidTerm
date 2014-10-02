@@ -1,25 +1,32 @@
 package pos_practicemidterm;
 
 /**
- *
+ * This class represents a simulation of a register in a retail sales situation. 
+ * It is responsible for creating a receipt and for passing in new products & 
+ * their quantities. 
  * @author kramerj
  */
 public class Register {
     Receipt receipt;
-    public static int receiptNum;
+    public static int receiptNumber = 0;
     
-    //get item number and quantity
+    
+    public Register() {
+        
+    }
+    
     /**
-     * Method that starts a new transaction and creates a new receipt object
+     * Method that starts a new transaction. Creates a new receipt object and 
+     * increments a the receipt number every time a new transaction is started
      * @param customerId Passes in the id of a customer
+     * @param db Passes in a database object
      */
     public void startNewTransaction(String customerId, DatabaseStrategy db) {
         receipt = new Receipt(customerId, db);
-        
-        receiptNum++;
+        receiptNumber++;
     }
 
-    //addItem method. Added to lineItem
+    
     /**
      * Method that adds another item to the transaction. 
      * This method delegates to the receipt class to add another line item
@@ -28,7 +35,26 @@ public class Register {
      */
     public void addItem(String productId, int quantity) {
         receipt.addLineItem(productId, quantity);
+        
     }
     
+    /**
+     * This method ends a transaction and will have the receipt class
+     * output a receipt
+     */
+    public void endTransaction(){
+        receipt.outputReceipt();
+    }
+    
+//    public static void main(String[] args) {
+//        DatabaseStrategy db = new FakeDatabase();
+//        Register r = new Register();
+//        r.startNewTransaction("CB_101", db);
+//        
+//        r.addItem("A202", 2);
+//        
+//        r.endTransaction();
+//    }
+//    
     
 }

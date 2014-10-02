@@ -16,7 +16,7 @@ public class NoDiscount implements DiscountStrategy {
      * @return Will return 0 since we do not want a discount amount
      */
     @Override
-    public double getProductDiscount(double unitPrice) {
+    public double getProductDiscount(double unitPrice, int qty) {
         return 0;
     }
     

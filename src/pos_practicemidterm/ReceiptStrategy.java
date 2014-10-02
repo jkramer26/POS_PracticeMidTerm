@@ -9,6 +9,12 @@ package pos_practicemidterm;
  *
  * @author owner
  */
-public class ReceiptStrategy {
+public interface ReceiptStrategy {
+    
+    public abstract void outputReceipt();
+    
+    public abstract void addLineItem();
+    
+    
     
 }

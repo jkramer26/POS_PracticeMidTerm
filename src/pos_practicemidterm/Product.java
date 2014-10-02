@@ -28,12 +28,15 @@ public class Product {
         setDiscountStrategy(discountStrategy);
     }
     
+    
     /**
-     * This method gets the discount amount for a product
+     * This method gets the discount amount for a product & passes in the 
+     * the quantity of a product
+     * @param qty This is passed in from the lineItem class 
      * @return This will return the discount amount
      */
-    public double getProductDiscount() {
-        return discountStrategy.getProductDiscount(unitPrice);
+    public double getProductDiscount(int qty) {
+        return discountStrategy.getProductDiscount(unitPrice, qty);
     }
     
     //getters and setters below

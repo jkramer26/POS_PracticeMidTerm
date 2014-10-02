@@ -9,18 +9,19 @@ package pos_practicemidterm;
  * @Jessica Kramer
  */
 public class Receipt {
+    private DatabaseStrategy db;        //DatabaseStrategy instance variable
+    private Customer customer;          //Customer instance variable
+    //private Store store;
+    private LineItem [] lineItems;              //variable that passes a line item into an array
+    private String receipt;             //variable to output receipt 
+    private double grandTotal;          //variable that holds the grandtotal of all line items
+    private double discountGrandTotal;  //variable that holds the total discount for all line items
     
-    private Store store;
-    private DatabaseStrategy db;
-    private LineItem item;
-    private Customer customer;
-    
-     
     //private final Customer ... find customer
     public Receipt(String customerId, DatabaseStrategy db) {
          customer = db.findCustomer(customerId);
          this.db = db;
-         
+         lineItems = new LineItem[0];
     }
 
     /**
@@ -29,18 +30,22 @@ public class Receipt {
      * @param qty    The quantity of the product purchased
      */
     public void addLineItem(String productId, int qty) {
-        item = new LineItem(productId, db, qty);
+        if(productId == null || productId.isEmpty() ||
+                qty < 0) {
+            throw new IllegalArgumentException();
+        }
+        LineItem item = new LineItem(productId, db, qty);
         addToArray(item);
     }
     
     //array to store lineItems
-    LineItem [] lineItems = new LineItem[0];
+   
     /**
      * A method to resize an existing array.
      * Makes a temporary array one size larger than lineItems array
      * and then copies lineItems into the tempItems. 
      * New item is added to tempArray and then lineItem array copies the tempArray
-     * @param item 
+     * @param item passes in a lineItem to the array
      */
     private void addToArray(final LineItem item) {
         // needs validation
@@ -50,11 +55,21 @@ public class Receipt {
         lineItems = tempItems;
     }
     
-    private String receipt; //variable to output lineItems & their 
-    //print receipt method that will loop through item array and output info 
+    /**
+     * This method will calculate the total discount for all the line items
+     * @return Will return the total discount
+     */
+    private double calculateDiscountGrandTotal(){
+        for (LineItem lineItem : lineItems) {
+            discountGrandTotal = (discountGrandTotal + lineItem.getLineItemDiscountTotal());
+        }
+        return discountGrandTotal;
+    }
     
-    //calculate the total of the lineItems
-    private double grandTotal;
+    /**
+     * Method that calculates the total of all line items
+     * @return Will return a grand total
+     */
     private double calculateGrandTotal() {
         for (LineItem lineItem : lineItems) {
             grandTotal = (grandTotal + lineItem.calculateLineItemTotal());
@@ -62,50 +77,62 @@ public class Receipt {
         return grandTotal;
     }
     
-    private String printReceipt() {
+    /**
+     * Method that will print out a receipt with all line items and a grand total
+     * while formatting all the information. 
+     */
+    //make the println's below be final variables
+    public void outputReceipt() {
+        System.out.println("____________________________________________________________________________________________________");
+        System.out.println("____________________________________________________________________________________________________");
+        System.out.println("Receipt #: " + Register.receiptNumber + "\n");
+        System.out.println("Product \t" + "Product Description \t" + "Unit Price \t" + "Qty \t" 
+                            + "\t Subtotal ");
+        System.out.println("---------------------------------------------------------------------------------------------------");
+        
         for (LineItem lineItem : lineItems) {
             lineItem.printLineItem();
         }
         
-        System.out.println("GrandTotal: " + calculateGrandTotal());
+        System.out.print("\t\t \t\t \t\t \t\t--------------------\n");
         
-        return receipt;
+        System.out.println("\t\t \t\t \t\t \t\tGrandTotal: " + calculateGrandTotal());
+        System.out.println("\t\t \t\t \t\t \t\t____________________");
+        System.out.println("\n \t\t\t YOU SAVED: " + calculateDiscountGrandTotal());
+        System.out.println("____________________________________________________________________________________________________");
+        System.out.println("____________________________________________________________________________________________________\n\n");
     }
     
-    public static void main(String[] args) {
-        FakeDatabase d = new FakeDatabase();
-        
-//        LineItem line = new LineItem("A202", d, 2);
-//        LineItem line2 = new LineItem("F485", d, 2);
-//        LineItem line3 = new LineItem("E404", d, 2);
+    //print entire receipt with layout
+    
+    
+//    public static void main(String[] args) {
+//        FakeDatabase d = new FakeDatabase();
 //        
-        
-        Receipt receipt = new Receipt("CB_101", d);
-        System.out.println("First Receipt");
-        receipt.addLineItem("A202", 2);
-        receipt.addLineItem("F485", 2);
-        receipt.addLineItem("E404", 2);
-        receipt.printReceipt();
-        System.out.println("__________________________________");
-        
-        Receipt receipt2 = new Receipt("CB_202", d);
-        System.out.println("Second Receipt");
-        receipt2.addLineItem("A202", 2);
-        receipt2.addLineItem("F485", 2);
-        receipt2.addLineItem("E404", 2);
-        receipt2.printReceipt();
-        System.out.println("__________________________________");
-        
-        Receipt receipt3 = new Receipt("CB_303", d);
-        System.out.println("Third Receipt");
-        receipt3.addLineItem("A202", 2);
-        receipt3.addLineItem("F485", 2);
-        receipt3.addLineItem("E404", 2);
-        receipt3.printReceipt();
-        System.out.println("__________________________________");
-        
-        
-        
-    }
+////        LineItem line = new LineItem("A202", d, 2);
+////        LineItem line2 = new LineItem("F485", d, 2);
+////        LineItem line3 = new LineItem("E404", d, 2);        
+//        
+//        Receipt receipt = new Receipt("CB_101", d);
+//        receipt.addLineItem("A202", 2);
+//        receipt.addLineItem("F485", 2);
+//        receipt.addLineItem("E404", 2);
+//        receipt.outputReceipt();
+//        
+//        Receipt receipt2 = new Receipt("CB_202", d);
+//        receipt2.addLineItem("A202", 2);
+//        receipt2.addLineItem("F485", 2);
+//        receipt2.addLineItem("E404", 2);
+//        receipt2.outputReceipt();
+//        
+//        Receipt receipt3 = new Receipt("CB_303", d);
+//        receipt3.addLineItem("A202", 2);
+//        receipt3.addLineItem("F485", 2);
+//        receipt3.addLineItem("E404", 2);
+//        receipt3.outputReceipt();
+//        
+//        
+//        
+//    }
     
 }

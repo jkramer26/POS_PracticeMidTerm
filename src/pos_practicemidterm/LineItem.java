@@ -48,7 +48,7 @@ public class LineItem {
      * @return Will return the total discount amount
      */
     public double getLineItemDiscountTotal() {
-        discountTotal = (product.getProductDiscount() * quantity);
+        discountTotal = (product.getProductDiscount(quantity));
         
         return discountTotal;
     }
@@ -65,7 +65,6 @@ public class LineItem {
         return lineItemTotal;
     }
     
-    //getters and setters. Should this be for every property
     /**
      * This method will return the quantity for a product
      * @return Returns product quantity
@@ -86,22 +85,15 @@ public class LineItem {
         this.quantity = quantity;
     }
     
+    /**
+     * This method will print out the a line items product's id, description, 
+     * unit price, quantity, calculated total, & discount total.
+     */
     public void printLineItem(){
-//        System.out.println("Here is a line item");
-//        System.out.println("Product ID: " + product.getProductId()); done
-//        System.out.println("Product Description: " + product.getProductDescription()); done
-//        System.out.println("Product Price: " + product.getUnitPrice()); done
-//        System.out.println("Discount for a product: " + product.getProductDiscount()); not done
-//        System.out.println("Total for products: " + getLineItemProductTotal()); not done
-//        System.out.println("Total discount for products: " + getLineItemDiscountTotal());
-//        System.out.println("Subtotal: " + calculateLineItemTotal());
-//        System.out.println("____________________________________");
-        
-        System.out.println("Product \t" + "Product Description \t" + "Unit Price \t" + "Quantity \t" 
-                            + "Total Discount \t" + "Subtotal ");
-        System.out.println("---------------------------------------------------------------------------------------------------");
+
         System.out.println(product.getProductId() + "\t\t" + product.getProductDescription() + "\t\t" + product.getUnitPrice()
-                            + "\t\t" + getQuantity() + "\t\t" + getLineItemDiscountTotal() + "\t\t" + calculateLineItemTotal() + "\n");
+                            + "\t\t" + getQuantity() +  "\t\t   " + calculateLineItemTotal());
+        System.out.println("\t\t \t\t \t\t \t\t Discount: -" + getLineItemDiscountTotal() +"\n");
     }
     
     //for testing purposes

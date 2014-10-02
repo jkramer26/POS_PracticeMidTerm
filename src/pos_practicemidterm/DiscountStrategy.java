@@ -16,6 +16,6 @@ public interface DiscountStrategy {
      * @param unitPrice Passes in a product's unit price
      * @return Will return a discount for a product
      */
-    public abstract double getProductDiscount(double unitPrice);
+    public abstract double getProductDiscount(double unitPrice, int qty);
     
 }
