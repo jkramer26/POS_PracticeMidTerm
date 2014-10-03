@@ -15,6 +15,8 @@ public class LineItem {
     private double lineProductTotal;       //Holds the total amount for all the products
     private double discountTotal;          //Holds the total discount the quantity of products
     private double lineItemTotal;          //Holds the total line item amount after discount is taken off
+    //The constant below is used for formatting lineItem output
+    private final String TWO_TAB = "\t\t";
     
     /**
      * LineItem constructor that has values passed in when object is created
@@ -88,33 +90,14 @@ public class LineItem {
     /**
      * This method will print out the a line items product's id, description, 
      * unit price, quantity, calculated total, & discount total.
+     * 
+     * The consoleReceipt.FOUR_TABS is a global constant from the consoleReceipt class
      */
     public void printLineItem(){
 
-        System.out.println(product.getProductId() + "\t\t" + product.getProductDescription() + "\t\t" + product.getUnitPrice()
-                            + "\t\t" + getQuantity() +  "\t\t   " + calculateLineItemTotal());
-        System.out.println("\t\t \t\t \t\t \t\t Discount: -" + getLineItemDiscountTotal() +"\n");
-    }
-    
-    //for testing purposes
-//    public static void main(String[] args) {
-//        //System.out.println("Product: " + product.setProductId("452"));
-//        FakeDatabase d = new FakeDatabase();
-//        
-//        LineItem line = new LineItem("A202", d, 2);
-//        LineItem line2 = new LineItem("F485", d, 2);
-//        LineItem line3 = new LineItem("E404", d, 2);
-//        
-//        line.printLineItem();
-//        System.out.println("____________________________________");
-//        
-//        line2.printLineItem();
-//        System.out.println("____________________________________");
-//        
-//        line3.printLineItem();
-//        System.out.println("____________________________________");
-//        
-//    }
-    
+        System.out.println(product.getProductId() + TWO_TAB + product.getProductDescription() + TWO_TAB + product.getUnitPrice()
+                            + TWO_TAB + getQuantity() +  TWO_TAB + "   " + calculateLineItemTotal());
+        System.out.println(ConsoleReceipt.FOUR_TABS_OF_TWO + " Discount: -" + getLineItemDiscountTotal() +"\n");
+    }    
     
 }

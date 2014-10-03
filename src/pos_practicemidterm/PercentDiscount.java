@@ -23,7 +23,7 @@ public class PercentDiscount implements DiscountStrategy {
     @Override
     public double getProductDiscount(double unitPrice, int qty) {
         discountAmount = (unitPrice * qty * .10);
-        if(discountAmount < 0) {
+        if(discountAmount <= 0) {
             throw new IllegalArgumentException();
         }
         return discountAmount;

@@ -6,6 +6,8 @@ package pos_practicemidterm;
  * It is responsible for managing miscellaneous receipt, customer and line item information. 
  * It also serves as a high-level service class, delegating to varying data access strategies 
  * and output strategies. 
+ * This receipt will output to the console.
+ * 
  * @Jessica Kramer
  */
 public class ConsoleReceipt implements ReceiptStrategy {
@@ -13,10 +15,13 @@ public class ConsoleReceipt implements ReceiptStrategy {
     private Customer customer;          //Customer instance variable
     //private Store store;
     private LineItem [] lineItems;      //variable name for an array 
-    private String receipt;             //variable to output receipt 
     private double grandTotal;          //variable that holds the grandtotal of all line items
     private double discountGrandTotal;  //variable that holds the total discount for all line items
     
+    //below are constants used for formatting the receipt
+    private final String LONG_SOLID_LINE = "____________________________________________________________________________________________________";
+    private final String LONG_DOTTED_LINE = "---------------------------------------------------------------------------------------------------";
+    public static final String FOUR_TABS_OF_TWO = "\t\t \t\t \t\t \t\t";
     /**
      * This is a constructor that passes in a customer id and a database 
      * object. The method finds a customer's id in a database and also initializes
@@ -94,56 +99,27 @@ public class ConsoleReceipt implements ReceiptStrategy {
     //make the println's below be final variables and store them at the top above
     @Override
     public void outputReceipt() {
-        System.out.println("____________________________________________________________________________________________________");
-        System.out.println("____________________________________________________________________________________________________");
-        System.out.println("Receipt #: " + Register.receiptNumber + "\n");
+        
+        System.out.println(LONG_SOLID_LINE);
+        System.out.println(LONG_SOLID_LINE);
+        System.out.println("Receipt #: " + Register.receiptNumber + "\n\n");
         System.out.println("Product \t" + "Product Description \t" + "Unit Price \t" + "Qty \t" 
                             + "\t Subtotal ");
-        System.out.println("---------------------------------------------------------------------------------------------------");
+        System.out.println(LONG_DOTTED_LINE);
         
         for (LineItem lineItem : lineItems) {
             lineItem.printLineItem();
         }
         
-        System.out.print("\t\t \t\t \t\t \t\t--------------------\n");
+        System.out.print(FOUR_TABS_OF_TWO + "--------------------\n");
         
-        System.out.println("\t\t \t\t \t\t \t\tGrandTotal: " + calculateGrandTotal());
-        System.out.println("\t\t \t\t \t\t \t\t____________________");
+        System.out.println(FOUR_TABS_OF_TWO + "GrandTotal: " + calculateGrandTotal());
+        System.out.println(FOUR_TABS_OF_TWO + "____________________");
         System.out.println("\n \t\t\t YOU SAVED: " + calculateDiscountGrandTotal());
-        System.out.println("____________________________________________________________________________________________________");
-        System.out.println("____________________________________________________________________________________________________\n\n");
+        System.out.println(LONG_SOLID_LINE);
+        System.out.println(LONG_SOLID_LINE + "\n\n");
     }
     
     //print entire receipt with layout
-    
-    
-//    public static void main(String[] args) {
-//        FakeDatabase d = new FakeDatabase();
-//        
-////        LineItem line = new LineItem("A202", d, 2);
-////        LineItem line2 = new LineItem("F485", d, 2);
-////        LineItem line3 = new LineItem("E404", d, 2);        
-//        
-//        Receipt receipt = new Receipt("CB_101", d);
-//        receipt.addLineItem("A202", 2);
-//        receipt.addLineItem("F485", 2);
-//        receipt.addLineItem("E404", 2);
-//        receipt.outputReceipt();
-//        
-//        Receipt receipt2 = new Receipt("CB_202", d);
-//        receipt2.addLineItem("A202", 2);
-//        receipt2.addLineItem("F485", 2);
-//        receipt2.addLineItem("E404", 2);
-//        receipt2.outputReceipt();
-//        
-//        Receipt receipt3 = new Receipt("CB_303", d);
-//        receipt3.addLineItem("A202", 2);
-//        receipt3.addLineItem("F485", 2);
-//        receipt3.addLineItem("E404", 2);
-//        receipt3.outputReceipt();
-//        
-//        
-//        
-//    }
     
 }

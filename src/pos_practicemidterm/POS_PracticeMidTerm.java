@@ -30,7 +30,6 @@ public class POS_PracticeMidTerm {
         r.addItem("F485", 2);
         r.addItem("E404", 2);
         r.endTransaction();
-        
     }
     
 }
