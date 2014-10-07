@@ -9,14 +9,15 @@ package pos_practicemidterm;
  */
 
 public class LineItem {
-    private Product product;               //Product instance variable
-    private int quantity;                  //Quantity variable for a product
-    private DatabaseStrategy db;           //Instance variable.
-    private double lineProductTotal;       //Holds the total amount for all the products
-    private double discountTotal;          //Holds the total discount the quantity of products
-    private double lineItemTotal;          //Holds the total line item amount after discount is taken off
+    private Product product;                            //Product instance variable
+    private int quantity;                               //Quantity variable for a product
+    private DatabaseStrategy db;                        //Instance variable.
+    private double lineProductTotal;                    //Holds the total amount for all the products
+    private double discountTotal;                       //Holds the total discount the quantity of products
+    private double lineItemTotalAfterDiscount;          //Holds the total line item amount after discount is taken off
     //The constant below is used for formatting lineItem output
     private final String TWO_TAB = "\t\t";
+    private final String FOUR_TABS_OF_TWO = "\t\t \t\t \t\t \t\t";
     
     /**
      * LineItem constructor that has values passed in when object is created
@@ -39,7 +40,7 @@ public class LineItem {
      * by the product's unit price
      * @return Will return the total amount for a line item
      */
-    public double getLineItemProductTotal() {
+    private double getLineItemProductTotal() {
         lineProductTotal = ((quantity * product.getUnitPrice()));
         
         return lineProductTotal;
@@ -58,13 +59,18 @@ public class LineItem {
     /**
      * This method will calculate the true total for the line item. It takes the 
      * product line item total and subtracts it from the discount product total.
+     * 
+     * It calls the ItemProductTotal & DiscountTotal method so that the variables 
+     * are populated with the totals for the correct lineItemTotal
+     * 
      * @return Will return the true line item total amount
      */
     public double calculateLineItemTotal(){
         getLineItemProductTotal();
-        getLineItemProductTotal();
-        lineItemTotal = (lineProductTotal - discountTotal);
-        return lineItemTotal;
+        getLineItemDiscountTotal();
+        
+        lineItemTotalAfterDiscount = (lineProductTotal - discountTotal);
+        return lineItemTotalAfterDiscount;
     }
     
     /**
@@ -92,12 +98,20 @@ public class LineItem {
      * unit price, quantity, calculated total, & discount total.
      * 
      * The consoleReceipt.FOUR_TABS is a global constant from the consoleReceipt class
+     * @return 
      */
-    public void printLineItem(){
-
-        System.out.println(product.getProductId() + TWO_TAB + product.getProductDescription() + TWO_TAB + product.getUnitPrice()
-                            + TWO_TAB + getQuantity() +  TWO_TAB + "   " + calculateLineItemTotal());
-        System.out.println(ConsoleReceipt.FOUR_TABS_OF_TWO + " Discount: -" + getLineItemDiscountTotal() +"\n");
-    }    
+    public String printLineItem(){
+        
+        String output = product.getProductId() + TWO_TAB + product.getProductDescription() + TWO_TAB + product.getUnitPrice()
+                            + TWO_TAB + getQuantity() +  TWO_TAB + "   " + calculateLineItemTotal() 
+                            + "\n" + FOUR_TABS_OF_TWO + " Discount: -" + getLineItemDiscountTotal() +"\n";
+//        System.out.println(product.getProductId() + TWO_TAB + product.getProductDescription() + TWO_TAB + product.getUnitPrice()
+//                            + TWO_TAB + getQuantity() +  TWO_TAB + "   " + calculateLineItemTotal());
+//        System.out.println(ConsoleReceipt.FOUR_TABS_OF_TWO + " Discount: -" + getLineItemDiscountTotal() +"\n");
+        
+        return output;
+    }
+    
+    
     
 }

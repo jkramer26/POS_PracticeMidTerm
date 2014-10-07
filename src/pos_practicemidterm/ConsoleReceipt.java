@@ -19,9 +19,10 @@ public class ConsoleReceipt implements ReceiptStrategy {
     private double discountGrandTotal;  //variable that holds the total discount for all line items
     
     //below are constants used for formatting the receipt
+    //all are global and able to be accessed by other classes
     private final String LONG_SOLID_LINE = "____________________________________________________________________________________________________";
     private final String LONG_DOTTED_LINE = "---------------------------------------------------------------------------------------------------";
-    public static final String FOUR_TABS_OF_TWO = "\t\t \t\t \t\t \t\t";
+    private final String FOUR_TABS_OF_TWO = "\t\t \t\t \t\t \t\t";
     /**
      * This is a constructor that passes in a customer id and a database 
      * object. The method finds a customer's id in a database and also initializes
@@ -36,7 +37,7 @@ public class ConsoleReceipt implements ReceiptStrategy {
          }
          customer = db.findCustomer(customerId);
          this.db = db;
-         lineItems = new LineItem[0];   //this is an array to store line items in
+         lineItems = new LineItem[0];   //this is an array to store line items within
     }
 
     /**
@@ -108,7 +109,7 @@ public class ConsoleReceipt implements ReceiptStrategy {
         System.out.println(LONG_DOTTED_LINE);
         
         for (LineItem lineItem : lineItems) {
-            lineItem.printLineItem();
+            System.out.println(lineItem.printLineItem());
         }
         
         System.out.print(FOUR_TABS_OF_TWO + "--------------------\n");
@@ -120,6 +121,5 @@ public class ConsoleReceipt implements ReceiptStrategy {
         System.out.println(LONG_SOLID_LINE + "\n\n");
     }
     
-    //print entire receipt with layout
     
 }
