@@ -15,12 +15,15 @@ public class Register {
     /**
      * Method that starts a new transaction. Creates a new receipt object and 
      * increments a the receipt number every time a new transaction is started
-     * @param customerId Passes in the id of a customer
-     * @param db Passes in a database object
+     * @param receipt This passes in a receipt object that cannot be null
      */
-    public void startNewTransaction(String customerId, DatabaseStrategy db) {
-        receipt = new GUIReceipt(customerId, db);
+    public void startNewTransaction(ReceiptStrategy receipt) {
+        if(receipt == null) {
+            throw new IllegalArgumentException();
+        }  
+        this.receipt = receipt;
         receiptNumber++;
+        
     }
 
     
@@ -42,6 +45,14 @@ public class Register {
     public void endTransaction(){
         receipt.outputReceipt();
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
 //    public static void main(String[] args) {
 //        DatabaseStrategy db = new FakeDatabase();

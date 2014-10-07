@@ -19,17 +19,19 @@ public class POS_PracticeMidTerm {
         //creates a register object
         Register r = new Register();
        
-        r.startNewTransaction("CB_101", db);
+        r.startNewTransaction(new GUIReceipt("CB_101", db));
         r.addItem("A202", 2);
         r.addItem("F485", 2);
         r.addItem("E404", 2);
         r.endTransaction();
-       
-        r.startNewTransaction("CB_202", db);
-        r.addItem("E404", 2);
+        
+        //starts a new transaction and
+        r.startNewTransaction(new ConsoleReceipt("CB_202", db));
         r.addItem("A202", 2);
+        r.addItem("E404", 2);
         r.addItem("F485", 2);
         r.endTransaction();
+        
     }
     
 }

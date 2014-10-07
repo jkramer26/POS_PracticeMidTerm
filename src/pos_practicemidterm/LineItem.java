@@ -1,6 +1,8 @@
 
 package pos_practicemidterm;
 
+import java.text.NumberFormat;
+
 /**
  * This class represents a line item on a receipt. It calculates a line item's discount amount,
  * product amount, and then the subtotal amount after discount is taken off.
@@ -18,6 +20,9 @@ public class LineItem {
     //The constant below is used for formatting lineItem output
     private final String TWO_TAB = "\t\t";
     private final String FOUR_TABS_OF_TWO = "\t\t \t\t \t\t \t\t";
+    
+    NumberFormat formatter = NumberFormat.getCurrencyInstance();
+
     
     /**
      * LineItem constructor that has values passed in when object is created
@@ -102,9 +107,9 @@ public class LineItem {
      */
     public String printLineItem(){
         
-        String output = product.getProductId() + TWO_TAB + product.getProductDescription() + TWO_TAB + product.getUnitPrice()
-                            + TWO_TAB + getQuantity() +  TWO_TAB + "   " + calculateLineItemTotal() 
-                            + "\n" + FOUR_TABS_OF_TWO + " Discount: -" + getLineItemDiscountTotal() +"\n";
+        String output = product.getProductId() + TWO_TAB + product.getProductDescription() + TWO_TAB + formatter.format(product.getUnitPrice())
+                            + TWO_TAB + getQuantity() +  TWO_TAB + "   " + formatter.format(calculateLineItemTotal()) 
+                            + "\n" + FOUR_TABS_OF_TWO + "Discount: -" + formatter.format(getLineItemDiscountTotal()) +"\n";
 //        System.out.println(product.getProductId() + TWO_TAB + product.getProductDescription() + TWO_TAB + product.getUnitPrice()
 //                            + TWO_TAB + getQuantity() +  TWO_TAB + "   " + calculateLineItemTotal());
 //        System.out.println(ConsoleReceipt.FOUR_TABS_OF_TWO + " Discount: -" + getLineItemDiscountTotal() +"\n");

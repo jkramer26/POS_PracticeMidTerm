@@ -1,6 +1,8 @@
 
 package pos_practicemidterm;
 
+import java.text.NumberFormat;
+
 /**
  * This class represents a simulation of a real receipt in a retail sales situation. 
  * It is responsible for managing miscellaneous receipt, customer and line item information. 
@@ -15,14 +17,18 @@ public class ConsoleReceipt implements ReceiptStrategy {
     private Customer customer;          //Customer instance variable
     //private Store store;
     private LineItem [] lineItems;      //variable name for an array 
-    private double grandTotal;          //variable that holds the grandtotal of all line items
-    private double discountGrandTotal;  //variable that holds the total discount for all line items
+    private double grandTotal = 0;          //variable that holds the grandtotal of all line items
+    private double discountGrandTotal = 0;  //variable that holds the total discount for all line items
     
     //below are constants used for formatting the receipt
     //all are global and able to be accessed by other classes
     private final String LONG_SOLID_LINE = "____________________________________________________________________________________________________";
     private final String LONG_DOTTED_LINE = "---------------------------------------------------------------------------------------------------";
     private final String FOUR_TABS_OF_TWO = "\t\t \t\t \t\t \t\t";
+    
+    NumberFormat formatter = NumberFormat.getCurrencyInstance();
+
+    
     /**
      * This is a constructor that passes in a customer id and a database 
      * object. The method finds a customer's id in a database and also initializes
@@ -103,7 +109,8 @@ public class ConsoleReceipt implements ReceiptStrategy {
         
         System.out.println(LONG_SOLID_LINE);
         System.out.println(LONG_SOLID_LINE);
-        System.out.println("Receipt #: " + Register.receiptNumber + "\n\n");
+        System.out.println("Receipt #: " + Register.receiptNumber);
+        System.out.println("Customer Name: " + customer.getCustomerName() + "\n\n");
         System.out.println("Product \t" + "Product Description \t" + "Unit Price \t" + "Qty \t" 
                             + "\t Subtotal ");
         System.out.println(LONG_DOTTED_LINE);
@@ -114,9 +121,9 @@ public class ConsoleReceipt implements ReceiptStrategy {
         
         System.out.print(FOUR_TABS_OF_TWO + "--------------------\n");
         
-        System.out.println(FOUR_TABS_OF_TWO + "GrandTotal: " + calculateGrandTotal());
+        System.out.println(FOUR_TABS_OF_TWO + "GrandTotal: " + formatter.format(calculateGrandTotal()));
         System.out.println(FOUR_TABS_OF_TWO + "____________________");
-        System.out.println("\n \t\t\t YOU SAVED: " + calculateDiscountGrandTotal());
+        System.out.println("\n \t\t\t YOU SAVED: " + formatter.format(calculateDiscountGrandTotal()));
         System.out.println(LONG_SOLID_LINE);
         System.out.println(LONG_SOLID_LINE + "\n\n");
     }
